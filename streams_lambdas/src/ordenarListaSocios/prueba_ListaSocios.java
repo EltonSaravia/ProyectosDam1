@@ -19,8 +19,8 @@ public class prueba_ListaSocios {
         listaSocios.addSocio("123456789A", "Juan Pérez", LocalDate.of(1990, 1, 1), 150, 1);
         listaSocios.addSocio("987654321B", "María Sánchez", LocalDate.of(1985, 5, 15), 120, 2);
         listaSocios.addSocio("543216789C", "Pedro López", LocalDate.of(1987, 8, 20), 120, 0);
-        listaSocios.addSocio("987654321D", "Ana García", LocalDate.of(1992, 12, 5), 130, 3);
-        listaSocios.addSocio("123450987E", "Luis Martínez", LocalDate.of(1983, 6, 10), 160, 2);
+        listaSocios.addSocio("987654321D", "Ana García", LocalDate.of(1992, 12, 5), 80, 3);
+        listaSocios.addSocio("123450987E", "Luis Martínez", LocalDate.of(1983, 6, 10), 90, 2);
         
         
         int opcion = 0;
@@ -30,7 +30,7 @@ public class prueba_ListaSocios {
             System.out.println("1. Agregar socio");
             System.out.println("2. Calcular edad de un socio");
             System.out.println("3. Calcular meses de antigüedad de un socio");
-            System.out.println("4. Eliminar socio");
+            System.out.println("4. Mostrar por pantalla");
             System.out.println("5. Salir");
             System.out.print("Seleccione una opción: ");
             opcion = scanner.nextInt();
@@ -72,9 +72,56 @@ public class prueba_ListaSocios {
                     System.out.println("la edad del socio es : "+listaSocios.saberEdadSocio(dniElegido));
                     break;
                 case 3:
-                    
+                	
+                	System.out.println("Ingrese el DNI del socio: ");
+                    String dniInsertado = scanner.next();
+                    System.out.println("La antiguedad del socio es de: "+ listaSocios.saberMesesAntiguedad(dniInsertado));
                     break;
+                    
                 case 4:
+                	 System.out.println("-------- Visualizar lista de socios --------");
+                     System.out.println("1) 	Ordenador por DNI");
+                     System.out.println("2) 	Con un cuota mayor de 100 €");
+                     System.out.println("3) 	Cuyo nombre empieza por “A”");
+                     System.out.println("4) 	socios ordenados por antigüedad");
+                     System.out.println("5) 	socios ordenados por edad");
+                     System.out.print("Seleccione una opción: ");
+                     
+                     opcion = scanner.nextInt();
+                     scanner.nextLine();
+	                     switch (opcion) { 
+	                     
+	                     case 1:
+	                    	listaSocios.obtenerLista().stream().sorted()
+	                    	.forEach(System.out::println);       
+	                      break;
+	                     case 2:
+	                    	 listaSocios.obtenerLista().stream()
+	                    	 .filter(n -> n.getCuota() > 100).
+                             forEach(System.out::println);  
+	                    	 
+	                     case 3 :
+	                    	 listaSocios.obtenerLista().stream()
+	                    	 .filter(n -> n.getNombre().startsWith("A")).
+                             forEach(System.out::println); 
+	                      break;
+	                     case 4 :
+		                     
+	                    	 listaSocios.obtenerLista().stream()
+	                    	 .sorted((x,y)->x.getFechaAlta().compareTo(y.getFechaAlta())).
+                             forEach(System.out::println); 
+	                    	 
+		                      break;
+	                     case 5 :
+	                    	 listaSocios.obtenerLista().stream()
+	                    	 .sorted((x,y)->x.obtenerEdadCalculada().compareTo(y.obtenerEdadCalculada())).
+                             forEach(System.out::println); 
+		                      break;
+	                     default:
+	                      // Default secuencia de sentencias.
+	                   }
+                     
+                     
                    
                     break;
                 case 5:

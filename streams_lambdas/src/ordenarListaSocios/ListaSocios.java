@@ -2,8 +2,10 @@ package ordenarListaSocios;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Stream;
 
-public class ListaSocios {
+public class ListaSocios  {
 
 	private ArrayList <Socio> listadoInscripciones;
 	
@@ -59,5 +61,19 @@ public class ListaSocios {
 			throw new SocioNoExiste_Error();
 		}
 	}
+
+	public ArrayList<Socio> obtenerLista() {
+		;
+		
+		return this.listadoInscripciones;
+	}
+
+	@Override
+	public String toString() {
+		return "ListaSocios [listadoInscripciones=" + listadoInscripciones + "]";
+	}
+
+	
+	
 	
 }
